@@ -5,10 +5,6 @@ import 'package:meal_app/screen/FavuriteScreen.dart';
 import 'package:meal_app/widget/MainDrawer.dart';
 
 class TabBottom extends StatefulWidget {
-  final List<Meal> favouriteMeal;
-
-  TabBottom(this.favouriteMeal);
-
   @override
   _TabBottomState createState() => _TabBottomState();
 }
@@ -21,7 +17,7 @@ class _TabBottomState extends State<TabBottom> {
   void initState() {
     _listPage = [
       {"page": CategoryScreen(), "title": "Categories"},
-      {"page": FavoriteScreen(widget.favouriteMeal), "title": "Your Favourites"}
+      {"page": FavoriteScreen(), "title": "Your Favourites"}
     ];
     super.initState();
   }

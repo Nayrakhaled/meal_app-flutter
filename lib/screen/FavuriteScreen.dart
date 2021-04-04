@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/module/Meal.dart';
+import 'package:meal_app/providers/meal_provider.dart';
 import 'package:meal_app/widget/MealIteam.dart';
+import 'package:provider/provider.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  final List<Meal> favouriteMeal;
 
-  FavoriteScreen(this.favouriteMeal);
 
   @override
   Widget build(BuildContext context) {
+    final List<Meal> favouriteMeal = Provider.of<MealProvider>(context, listen: true).favouriteMeals;
+
     if (favouriteMeal.isEmpty)
       return Center(
         child: Text('You have no favourites yet '),

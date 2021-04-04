@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/widget/MainDrawer.dart';
+import 'package:meal_app/providers/meal_provider.dart';
+import 'package:provider/provider.dart';
 
 class FilterScreen extends StatefulWidget {
   static const String routeName = '/filter';
-  final Function saveFilter;
-  final Map<String, bool> currentFilter;
-
-  FilterScreen(this.currentFilter, this.saveFilter);
 
   @override
   _FilterScreenState createState() => _FilterScreenState();
@@ -20,10 +18,11 @@ class _FilterScreenState extends State<FilterScreen> {
 
   @override
   void initState() {
-     _glutenFree = widget.currentFilter['gluten'];
-     _lactoseFree = widget.currentFilter['lactose'];
-     _vegan = widget.currentFilter['vegan'];
-     _vegetarian = widget.currentFilter['vegetarian'];
+    final Map<String, bool> currentFilter = Provider.of<MealProvider>(context, listen: true).filters;
+    _glutenFree = currentFilter['gluten'];
+     _lactoseFree = currentFilter['lactose'];
+     _vegan = currentFilter['vegan'];
+     _vegetarian = currentFilter['vegetarian'];
     super.initState();
   }
 
@@ -52,8 +51,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   'vegan': _vegan,
                   'vegetarian': _vegetarian
                 };
-
-                widget.saveFilter(_filters);
+                Provider.of<MealProvider>(context, listen: false).selectedFilter(_filters);
               }),
         ],
       ),

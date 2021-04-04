@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/dummy_data.dart';
+import 'package:meal_app/providers/meal_provider.dart';
+import 'package:provider/provider.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const String routeName = 'meal_detail';
-  final Function saveFavourite;
-  final Function isMealFavourite;
 
-  const MealDetailScreen(this.saveFavourite, this.isMealFavourite);
+
 
 
   Widget buildText(BuildContext context, String title) {
@@ -20,6 +20,7 @@ class MealDetailScreen extends StatelessWidget {
   }
 
   Widget buildContainer(Widget child) {
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -38,7 +39,6 @@ class MealDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final mealId = ModalRoute.of(context).settings.arguments as String;
     final selectedMeal = DUMMY_MEALS.firstWhere((meal) => meal.id == mealId);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(selectedMeal.title),
@@ -89,8 +89,8 @@ itemCount: selectedMeal.steps.length,
       ),
       floatingActionButton: FloatingActionButton(
         //kda wa ana b3mal pop bb3t kema m3ha
-        child: Icon(isMealFavourite(mealId)?Icons.star:Icons.star_border),
-        onPressed: ()=>saveFavourite(mealId),
+        child: Icon(Provider.of<MealProvider>(context, listen: true).isMealFavourite?Icons.star:Icons.star_border),
+        onPressed: ()=>Provider.of<MealProvider>(context, listen: false).saveFavourite(mealId),
       ),
     );
   }
