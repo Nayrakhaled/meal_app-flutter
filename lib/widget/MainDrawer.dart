@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/screen/FilterScreen.dart';
+import 'package:meal_app/screen/ThemesScreen.dart';
 
 class MainDrawer extends StatelessWidget {
-  Widget buildListTilte(String title, IconData icon, Function Tab) {
+  Widget buildListTitle(String title, IconData icon, Function Tab, BuildContext ctx) {
     return ListTile(
       leading: Icon(
         icon,
+        color: Theme.of(ctx).buttonColor,
         size: 26,
       ),
       title: Text(
         title,
         style: TextStyle(
           fontSize: 24,
+          color: Theme.of(ctx).textTheme.bodyText1.color,
           fontFamily: 'RobotoCondensed',
           fontWeight: FontWeight.bold,
         ),
@@ -23,6 +26,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 0,
       child: Column(
         children: [
           Container(
@@ -39,8 +43,9 @@ class MainDrawer extends StatelessWidget {
                 )),
           ),
           SizedBox(height: 20),
-          buildListTilte("Meal", Icons.restaurant, (){Navigator.of(context).pushReplacementNamed('/');}),
-          buildListTilte("Filters", Icons.settings, (){Navigator.of(context).pushReplacementNamed(FilterScreen.routeName);}),
+          buildListTitle("Meal", Icons.restaurant, (){Navigator.of(context).pushReplacementNamed('/');},context),
+          buildListTitle("Filters", Icons.settings, (){Navigator.of(context).pushReplacementNamed(FilterScreen.routeName);}, context),
+          buildListTitle("Themes", Icons.color_lens, (){Navigator.of(context).pushReplacementNamed(ThemesScreen.routeName);}, context),
         ],
       ),
     );

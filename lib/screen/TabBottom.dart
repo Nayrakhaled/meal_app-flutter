@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/module/Meal.dart';
+import 'package:meal_app/providers/meal_provider.dart';
 import 'package:meal_app/screen/CategoryScreen.dart';
 import 'package:meal_app/screen/FavuriteScreen.dart';
 import 'package:meal_app/widget/MainDrawer.dart';
+import 'package:provider/provider.dart';
 
 class TabBottom extends StatefulWidget {
   @override
@@ -15,6 +17,7 @@ class _TabBottomState extends State<TabBottom> {
 
   @override
   void initState() {
+    Provider.of<MealProvider>(context, listen: false).getFilterData();
     _listPage = [
       {"page": CategoryScreen(), "title": "Categories"},
       {"page": FavoriteScreen(), "title": "Your Favourites"}
